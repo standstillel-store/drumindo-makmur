@@ -1,0 +1,9 @@
+Font yang ditanam di situs ini (subset Latin):
+
+- Inter (inter-regular.woff, inter-semibold.woff)
+  SIL Open Font License 1.1 - https://openfontlicense.org
+  (c) The Inter Project Authors - https://github.com/rsms/inter
+
+- TeX Gyre Heros Cn Bold (heros-cn-bold.woff)
+  GUST Font License - http://www.gust.org.pl/projects/e-foundry/licenses
+  (c) B. Jackowski, J. M. Nowacki (GUST e-foundry)

@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="id" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Drumindo Makmur – Penjualan Drum Plastik</title>
+  <meta name="description" content="Drumindo Makmur menjual drum plastik. Pilih produk, lalu pesan langsung lewat WhatsApp.">
+  <meta name="theme-color" content="#0F3D2E">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <script>document.documentElement.className = 'js';</script>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+<!--
+  Nomor WhatsApp: 6281233545373 (+62 812-3354-5373). Semua link WhatsApp memakai format
+  https://wa.me/<nomor>?text=<pesan>. Jika nama produk diganti, ubah juga teks pesan di tombol Order Now-nya.
+-->
+
+<!-- Ikon dipakai ulang lewat <use> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></symbol>
+  <symbol id="i-drum" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M5 8.5h14M5 15.5h14"/></g></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+</svg>
+
+<header class="site-header">
+  <a class="brand" href="#top">
+    <svg class="icon brand__mark" aria-hidden="true" focusable="false"><use href="#i-drum"/></svg>
+    <span>Drumindo Makmur</span>
+  </a>
+  <nav aria-label="Navigasi utama">
+    <a href="#produk">Produk</a>
+    <a href="#tentang">Tentang</a>
+  </nav>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="hero__media">
+    <img src="images/hero.jpg" width="1600" height="900" alt="Ilustrasi truk membawa drum plastik biru" fetchpriority="high" decoding="async">
+  </div>
+
+  <div class="hero__content">
+    <h1 id="hero-title"><span>Drumindo</span> <span>Makmur</span></h1>
+    <div class="hero__actions">
+      <p class="hero__tagline">Penjualan drum plastik. Pilih produk, lalu pesan langsung lewat WhatsApp.</p>
+      <a class="btn" href="https://wa.me/6281233545373?text=Hallo%2C%20saya%20tertarik%20dengan%20produk%20Drumindo%20Makmur." target="_blank" rel="noopener">
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-wa"/></svg>
+        Order now
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUK -->
+<section class="products" id="produk" aria-labelledby="produk-title">
+  <div class="wrap">
+    <h2 class="section-title" id="produk-title">Produk Kami</h2>
+
+    <div class="catalog" data-carousel data-reveal>
+      <div class="catalog__media">
+        <div class="stage" role="group" aria-roledescription="carousel" aria-label="Foto produk">
+          <div class="stage__list">
+            <div class="slide" role="group" aria-roledescription="slide" aria-label="1 dari 3">
+              <div class="slide__plate"><img src="images/product-1.jpg" width="500" height="700" alt="Produk 1: drum plastik biru dengan dua lubang tutup di bagian atas" loading="lazy" draggable="false"></div>
+            </div>
+            <div class="slide" role="group" aria-roledescription="slide" aria-label="2 dari 3">
+              <div class="slide__plate"><img src="images/product-2.jpg" width="696" height="696" alt="Produk 2: drum plastik biru dengan tutup hitam dan cincin pengunci logam" loading="lazy" draggable="false"></div>
+            </div>
+            <div class="slide" role="group" aria-roledescription="slide" aria-label="3 dari 3">
+              <div class="slide__plate"><img src="images/product-3.jpg" width="768" height="996" alt="Produk 3: jerigen plastik biru dengan tutup ulir hitam dan pegangan" loading="lazy" draggable="false"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button class="controls__btn" type="button" data-step="-1" aria-label="Produk sebelumnya">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chev"/></svg>
+          </button>
+          <div class="dots" role="group" aria-label="Pilih produk">
+            <button class="dot" type="button" aria-label="Produk 1" aria-current="true"></button>
+            <button class="dot" type="button" aria-label="Produk 2"></button>
+            <button class="dot" type="button" aria-label="Produk 3"></button>
+          </div>
+          <button class="controls__btn controls__btn--next" type="button" data-step="1" aria-label="Produk berikutnya">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chev"/></svg>
+          </button>
+        </div>
+        <p class="sr-only" role="status" aria-live="polite" data-status></p>
+      </div>
+
+      <div class="detail">
+        <article class="detail__item is-active">
+          <h3 class="detail__name" data-placeholder>Produk 1</h3>
+          <p class="detail__text" data-placeholder>Deskripsi produk sedang disiapkan. Untuk detail dan ketersediaan, tanyakan langsung lewat WhatsApp.</p>
+          <dl class="spec">
+            <div><dt>Kapasitas</dt><dd data-placeholder>Menyusul</dd></div>
+            <div><dt>Ukuran</dt><dd data-placeholder>Menyusul</dd></div>
+            <div><dt>Bahan</dt><dd data-placeholder>Menyusul</dd></div>
+          </dl>
+          <a class="btn" href="https://wa.me/6281233545373?text=Hallo%2C%20saya%20tertarik%20dengan%20Produk%201%20dari%20Drumindo%20Makmur." target="_blank" rel="noopener">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-wa"/></svg>
+            Order now<span class="sr-only">: Produk 1 lewat WhatsApp</span>
+          </a>
+        </article>
+
+        <article class="detail__item">
+          <h3 class="detail__name" data-placeholder>Produk 2</h3>
+          <p class="detail__text" data-placeholder>Deskripsi produk sedang disiapkan. Untuk detail dan ketersediaan, tanyakan langsung lewat WhatsApp.</p>
+          <dl class="spec">
+            <div><dt>Kapasitas</dt><dd data-placeholder>Menyusul</dd></div>
+            <div><dt>Ukuran</dt><dd data-placeholder>Menyusul</dd></div>
+            <div><dt>Bahan</dt><dd data-placeholder>Menyusul</dd></div>
+          </dl>
+          <a class="btn" href="https://wa.me/6281233545373?text=Hallo%2C%20saya%20tertarik%20dengan%20Produk%202%20dari%20Drumindo%20Makmur." target="_blank" rel="noopener">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-wa"/></svg>
+            Order now<span class="sr-only">: Produk 2 lewat WhatsApp</span>
+          </a>
+        </article>
+
+        <article class="detail__item">
+          <h3 class="detail__name" data-placeholder>Produk 3</h3>
+          <p class="detail__text" data-placeholder>Deskripsi produk sedang disiapkan. Untuk detail dan ketersediaan, tanyakan langsung lewat WhatsApp.</p>
+          <dl class="spec">
+            <div><dt>Kapasitas</dt><dd data-placeholder>Menyusul</dd></div>
+            <div><dt>Ukuran</dt><dd data-placeholder>Menyusul</dd></div>
+            <div><dt>Bahan</dt><dd data-placeholder>Menyusul</dd></div>
+          </dl>
+          <a class="btn" href="https://wa.me/6281233545373?text=Hallo%2C%20saya%20tertarik%20dengan%20Produk%203%20dari%20Drumindo%20Makmur." target="_blank" rel="noopener">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-wa"/></svg>
+            Order now<span class="sr-only">: Produk 3 lewat WhatsApp</span>
+          </a>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TENTANG -->
+<section class="about" id="tentang" aria-labelledby="tentang-title">
+  <div class="wrap about__grid" data-reveal>
+    <h2 class="section-title" id="tentang-title">Tentang Drumindo Makmur</h2>
+    <div class="about__body">
+      <p class="about__lead">Drumindo Makmur menjual drum plastik.</p>
+      <p>Profil usaha, jenis produk, dan informasi lengkap akan ditambahkan di halaman ini. Untuk saat ini, pertanyaan tentang produk bisa langsung ditanyakan lewat WhatsApp.</p>
+      <a class="textlink" href="https://wa.me/6281233545373?text=Hallo%2C%20saya%20tertarik%20dengan%20produk%20Drumindo%20Makmur." target="_blank" rel="noopener">
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-wa"/></svg>
+        Chat lewat WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="wrap footer__row">
+    <a class="brand" href="#top">
+      <svg class="icon brand__mark" aria-hidden="true" focusable="false"><use href="#i-drum"/></svg>
+      <span>Drumindo Makmur</span>
+    </a>
+    <nav aria-label="Navigasi footer">
+      <a href="#produk">Produk</a>
+      <a href="#tentang">Tentang</a>
+    </nav>
+    <p class="footer__wa">
+      <span>WhatsApp:</span>
+      <a href="https://wa.me/6281233545373?text=Hallo%2C%20saya%20tertarik%20dengan%20produk%20Drumindo%20Makmur." target="_blank" rel="noopener">
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-wa"/></svg>
+        +62 812-3354-5373
+      </a>
+    </p>
+  </div>
+  <div class="wrap footer__legal">
+    <p>© 2026 Drumindo Makmur</p>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/6281233545373?text=Hallo%2C%20saya%20tertarik%20dengan%20produk%20Drumindo%20Makmur." target="_blank" rel="noopener" aria-label="Chat WhatsApp Drumindo Makmur">
+  <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-wa"/></svg>
+</a>
+
+</body>
+</html>
