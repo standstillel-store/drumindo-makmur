@@ -135,6 +135,28 @@ const products = [
       },
     ],
   },
+  {
+    name: 'IBC Tank / Bulk Tank 1000 Liter',
+    image: 'images/product-4.jpg',
+    alt: 'IBC tank 1000 liter dengan rangka besi dan palet, lengkap dengan ukuran',
+    description: 'IBC tank 1000 liter dari LLDPE dengan rangka besi dan tutup atas yang bisa dibuka.',
+    variantLabel: 'Tipe',
+    variants: [
+      {
+        name: '1000 L (open lid)',
+        specs: [
+          ['Kapasitas', '1000 L'],
+          ['Material', 'LLDPE'],
+          ['Panjang', '1200 mm'],
+          ['Lebar', '1000 mm'],
+          ['Tinggi', '1150 mm'],
+          ['Diameter lubang isi', '150 mm'],
+          ['Berat wadah dalam', '25 kg ±1'],
+          ['Berat total', '67 kg'],
+        ],
+      },
+    ],
+  },
 ];
 
 /* ============================== Kode ============================== */
@@ -211,7 +233,7 @@ const products = [
     const panel = h('article', { class: 'detail__item', id, 'aria-labelledby': `${id}-nama` },
       h('h3', { class: 'detail__name', id: `${id}-nama` }, p.name),
       h('p', { class: 'detail__text' }, p.description),
-      h('div', { class: 'variants', role: 'group', 'aria-labelledby': `${id}-varian` },
+      p.variants.length > 1 && h('div', { class: 'variants', role: 'group', 'aria-labelledby': `${id}-varian` },
         h('p', { class: 'variants__label', id: `${id}-varian` }, p.variantLabel),
         h('div', { class: 'variants__list' }, chips)),
       h('h4', { class: 'spec__title' }, p.specTitle || 'Spesifikasi'),
