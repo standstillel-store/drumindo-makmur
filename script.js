@@ -30,6 +30,8 @@ const products = [
         name: '30 L',
         specs: [
           ['Kapasitas', '30 L'],
+          ['Material', 'HDPE'],
+          ['Kondisi', 'Baru'],
           ['Tinggi', PENDING],
           ['Panjang', '305 mm'],
           ['Lebar', '280 mm'],
@@ -40,6 +42,8 @@ const products = [
         name: '35 L',
         specs: [
           ['Kapasitas', '35 L'],
+          ['Material', 'HDPE'],
+          ['Kondisi', 'Baru'],
           ['Tinggi', '535 mm'],
           ['Panjang', '305 mm'],
           ['Lebar', '280 mm'],
@@ -60,6 +64,7 @@ const products = [
         specs: [
           ['Kapasitas', '60 L'],
           ['Material', 'HDPE'],
+          ['Kondisi', 'Baru'],
           ['Berat', '2.080 g'],
           ['Tinggi', '625 mm'],
           ['Diameter', '400 mm'],
@@ -71,6 +76,7 @@ const products = [
         specs: [
           ['Kapasitas', '120 L'],
           ['Material', 'HDPE'],
+          ['Kondisi', 'Baru'],
           ['Berat', '5.000 g'],
           ['Tinggi', '785 mm'],
           ['Diameter', '493 mm'],
@@ -82,6 +88,7 @@ const products = [
         specs: [
           ['Kapasitas', konfirmasi('120 L')],
           ['Material', 'HDPE'],
+          ['Kondisi', 'Baru'],
           ['Berat', '6.100 g'],
           ['Tinggi', '975 mm'],
           ['Diameter', '493 mm'],
@@ -94,6 +101,7 @@ const products = [
         specs: [
           ['Kapasitas', '200 L'],
           ['Material', 'HDPE'],
+          ['Kondisi', 'Baru'],
           ['Berat', '10.000 g'],
           ['Tinggi', '994 mm'],
           ['Diameter', '580 mm'],
@@ -116,6 +124,7 @@ const products = [
         specs: [
           ['Kapasitas', '200 L'],
           ['Material', 'HDPE'],
+          ['Kondisi', 'Baru'],
           ['Tinggi', '936 mm'],
           ['Diameter body', '581 mm'],
           ['Diameter tutup', '73 mm'],
@@ -127,6 +136,7 @@ const products = [
         specs: [
           ['Kapasitas', '200 L'],
           ['Material', 'HDPE'],
+          ['Kondisi', 'Baru'],
           ['Tinggi', '936 mm'],
           ['Diameter body', '581 mm'],
           ['Diameter tutup', '73 mm'],
@@ -139,14 +149,15 @@ const products = [
     name: 'IBC Tank / Bulk Tank 1000 Liter',
     image: 'images/product-4.jpg',
     alt: 'IBC tank 1000 liter dengan rangka besi dan palet, lengkap dengan ukuran',
-    description: 'IBC tank 1000 liter dari LLDPE dengan rangka besi dan tutup atas yang bisa dibuka.',
+    description: 'IBC tank 1000 liter dari HDPE dengan rangka besi dan tutup atas yang bisa dibuka.',
     variantLabel: 'Tipe',
     variants: [
       {
         name: '1000 L (open lid)',
         specs: [
           ['Kapasitas', '1000 L'],
-          ['Material', 'LLDPE'],
+          ['Material', 'HDPE'],
+          ['Kondisi', 'Baru'],
           ['Panjang', '1200 mm'],
           ['Lebar', '1000 mm'],
           ['Tinggi', '1150 mm'],
