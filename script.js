@@ -18,6 +18,7 @@ const konfirmasi = (value) => ({ value, status: 'check' });
    - minOrder : minimum pembelian produk; PENDING = belum ada dari pemilik, tampil "Menunggu konfirmasi" */
 const MIN_DRUM = '100 pcs';
 const MIN_JERIGEN = '300 pcs';
+const MIN_IBC = '1 pcs';
 
 /* Satu produk = satu slide di carousel + satu panel informasi.
    image       : foto produk (rasio 5:4, 800 x 640 px)
@@ -25,7 +26,7 @@ const MIN_JERIGEN = '300 pcs';
                  (item = nama lengkap untuk judul harga dan pesan WhatsApp, price = harga)
    prices      : dipakai bila satu produk punya beberapa harga yang belum dipetakan ke pilihan di atas;
                  semua harga tampil bersamaan, masing-masing dengan namanya sendiri (row, price)
-   minOrder    : minimum pembelian (MIN_DRUM, MIN_JERIGEN, atau PENDING)
+   minOrder    : minimum pembelian (MIN_DRUM, MIN_JERIGEN, MIN_IBC, atau PENDING)
    features    : daftar keunggulan (boleh dihapus)
    specTitle   : judul spesifikasi (boleh dihapus, bawaan "Spesifikasi") */
 const products = [
@@ -45,7 +46,7 @@ const products = [
           ['Kapasitas', '30 L'],
           ['Material', 'HDPE'],
           ['Kondisi', 'Baru'],
-          ['Tinggi', PENDING],
+          ['Tinggi', '450 mm'],
           ['Panjang', '305 mm'],
           ['Lebar', '280 mm'],
           ['Berat', '1.400 g'],
@@ -59,11 +60,12 @@ const products = [
           ['Kapasitas', '35 L'],
           ['Material', 'HDPE'],
           ['Kondisi', 'Baru'],
-          ['Tinggi', '535 mm'],
+          ['Tinggi', konfirmasi('535 mm')],
           ['Panjang', '305 mm'],
           ['Lebar', '280 mm'],
           ['Berat', '1.500 g'],
         ],
+        note: 'Brosur menulis tinggi jerigen 35 L 535 mm, sedangkan keterangan terbaru dari pemilik 53 cm.',
       },
     ],
   },
@@ -183,7 +185,7 @@ const products = [
     image: 'images/product-4.jpg',
     alt: 'IBC tank 1000 liter dengan rangka besi dan palet, lengkap dengan ukuran',
     description: 'IBC tank 1000 liter dari HDPE dengan rangka besi dan tutup atas yang bisa dibuka.',
-    minOrder: PENDING,
+    minOrder: MIN_IBC,
     variantLabel: 'Tipe',
     variants: [
       {
