@@ -147,9 +147,6 @@ button { font: inherit; color: inherit; }
 }
 .site-header nav a:hover { border-color: var(--cobalt); }
 
-@media (max-width: 29.99rem) {
-  .site-header nav a[href="#tentang"] { display: none; }
-}
 /* Layar sangat sempit (320 px): logo dan menu dikecilkan sedikit supaya header tidak melebar */
 @media (max-width: 22.5rem) {
   .brand img { height: 2rem; }
@@ -244,9 +241,7 @@ button { font: inherit; color: inherit; }
   padding-block: var(--section-y);
   background: var(--off-white);
 }
-.products .section-title,
-.prices .section-title,
-.minimum .section-title { margin-bottom: clamp(1.25rem, 3vw, 2.25rem); }
+.products .section-title { margin-bottom: clamp(1.25rem, 3vw, 2.25rem); }
 
 .catalog {
   display: grid;
@@ -256,9 +251,7 @@ button { font: inherit; color: inherit; }
 
 .noscript { color: var(--ink-soft); }
 .noscript a { color: var(--cobalt); font-weight: 600; }
-.no-js .catalog,
-.no-js .prices,
-.no-js .minimum { display: none; }
+.no-js .catalog { display: none; }
 
 /* Carousel: semua slide menumpuk di satu sel grid; posisi, skala, blur, dan bayangan diatur script.js */
 .stage {
@@ -538,8 +531,7 @@ button { font: inherit; color: inherit; }
   .catalog__media { margin-inline: calc(-1 * var(--gutter)); }
 }
 @media (max-width: 39.99rem) {
-  .buy .btn,
-  .minimum .btn { width: 100%; }
+  .buy .btn { width: 100%; }
 }
 @media (min-width: 40rem) {
   .slide { width: min(66%, 30rem); }
@@ -555,110 +547,6 @@ button { font: inherit; color: inherit; }
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
     mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
   }
-}
-
-/* Daftar Harga: kelompok per produk, baris dengan garis tipis. Tanpa kartu, tanpa bayangan. */
-.prices {
-  padding-block: var(--section-y);
-  background: var(--white);
-}
-.pricelist {
-  display: grid;
-  gap: 2.25rem;
-}
-.pricegroup { break-inside: avoid; }
-.pricegroup h3 {
-  font: 700 1.5rem / 1.15 var(--font-display);
-  letter-spacing: 0.005em;
-  color: var(--navy);
-}
-.pricegroup__note {
-  margin-top: 0.2rem;
-  font-size: 0.875rem;
-  color: var(--ink-soft);
-}
-.pricegroup dl {
-  margin-top: 0.6rem;
-  border-bottom: 1px solid var(--line);
-}
-.pricegroup dl > div {
-  display: grid;
-  gap: 0.1rem;
-  padding: 0.9rem 0;
-  border-top: 1px solid var(--line);
-}
-.pricegroup dt {
-  font-weight: 600;
-  color: var(--navy);
-}
-.pricegroup dd {
-  font: 700 1.75rem / 1.1 var(--font-display);
-  letter-spacing: 0.01em;
-  color: var(--navy);
-}
-
-@media (min-width: 30rem) {
-  .pricegroup dl > div {
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: baseline;
-    gap: 1rem;
-  }
-  .pricegroup dd { text-align: right; }
-}
-@media (min-width: 48rem) {
-  /* Dua kolom yang mengalir dari atas ke bawah, supaya tidak ada celah kosong di antara kelompok */
-  .pricelist {
-    display: block;
-    column-count: 2;
-    column-gap: clamp(2.5rem, 6vw, 5rem);
-  }
-  .pricegroup { margin-bottom: 2.75rem; }
-}
-
-/* Pembelian Minimum: informasi pembelian, bukan peringatan, jadi tanpa warna merah */
-.minimum {
-  padding-block: var(--section-y);
-  background: var(--off-white);
-}
-.minimum__list { display: grid; }
-.minimum__list > div {
-  display: grid;
-  gap: 0.1rem;
-  padding: 1rem 0;
-  border-top: 1px solid var(--line-strong);
-}
-.minimum__list dt { color: var(--ink-soft); }
-.minimum__list dd {
-  font: 700 2rem / 1.1 var(--font-display);
-  letter-spacing: 0.01em;
-  color: var(--navy);
-}
-.minimum__list dd.is-pending {
-  font: 400 1rem / 1.5 var(--font-text);
-  font-style: italic;
-  color: var(--ink-soft);
-}
-.minimum .btn { margin-top: 1.5rem; }
-
-@media (min-width: 30rem) {
-  .minimum__list > div {
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: baseline;
-    gap: 1rem;
-  }
-}
-@media (min-width: 48rem) {
-  .minimum__list {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 2rem;
-  }
-  .minimum__list > div {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.25rem;
-    padding-top: 1.1rem;
-  }
-  .minimum__list dd { font-size: 2.5rem; }
-  .minimum__list dd.is-pending { font-size: 1rem; }
 }
 
 /* Tentang */

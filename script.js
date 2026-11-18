@@ -19,20 +19,12 @@ const konfirmasi = (value) => ({ value, status: 'check' });
 const MIN_DRUM = '100 pcs';
 const MIN_JERIGEN = '300 pcs';
 
-/* Blok "Pembelian Minimum". Nilainya sama dengan minOrder di produk. */
-const minimums = [
-  { name: 'Drum Plastik', value: MIN_DRUM },
-  { name: 'Jerigen', value: MIN_JERIGEN },
-  { name: 'IBC Tank', value: PENDING },
-];
-
 /* Satu produk = satu slide di carousel + satu panel informasi.
    image       : foto produk (rasio 5:4, 800 x 640 px)
    variants    : pilihan ukuran/tipe; spesifikasi dan harganya berganti saat dipilih
-                 (item = nama lengkap untuk pesan WhatsApp, row = nama pendek di Daftar Harga, price = harga)
+                 (item = nama lengkap untuk judul harga dan pesan WhatsApp, price = harga)
    prices      : dipakai bila satu produk punya beberapa harga yang belum dipetakan ke pilihan di atas;
                  semua harga tampil bersamaan, masing-masing dengan namanya sendiri (row, price)
-   listTitle   : judul kelompok di Daftar Harga
    minOrder    : minimum pembelian (MIN_DRUM, MIN_JERIGEN, atau PENDING)
    features    : daftar keunggulan (boleh dihapus)
    specTitle   : judul spesifikasi (boleh dihapus, bawaan "Spesifikasi") */
@@ -42,14 +34,12 @@ const products = [
     image: 'images/product-1.jpg',
     alt: 'Dua jerigen biru: 30 L bertutup hitam dan 35 L bertutup merah',
     description: 'Jerigen plastik biru ukuran 30 liter dan 35 liter.',
-    listTitle: 'Jerigen',
     minOrder: MIN_JERIGEN,
     variantLabel: 'Ukuran',
     variants: [
       {
         name: '30 L',
         item: 'Jerigen 30 Liter',
-        row: '30 L',
         price: 'Rp50.000',
         specs: [
           ['Kapasitas', '30 L'],
@@ -64,7 +54,6 @@ const products = [
       {
         name: '35 L',
         item: 'Jerigen 35 Liter',
-        row: '35 L',
         price: 'Rp51.000',
         specs: [
           ['Kapasitas', '35 L'],
@@ -83,14 +72,12 @@ const products = [
     image: 'images/product-2.jpg',
     alt: 'Empat drum open top biru: 60 L, 120 L, 150 L, dan 200 L',
     description: 'Drum plastik open top dari HDPE dalam empat tipe: O.T. 60, O.T. 120, O.T. 150, dan O.T. 200.',
-    listTitle: 'Drum Open Top',
     minOrder: MIN_DRUM,
     variantLabel: 'Tipe',
     variants: [
       {
         name: 'O.T. 60',
         item: 'Drum Open Top 60 L',
-        row: '60 L',
         price: 'Rp110.000',
         specs: [
           ['Kapasitas', '60 L'],
@@ -105,7 +92,6 @@ const products = [
       {
         name: 'O.T. 120',
         item: 'Drum Open Top 120 L',
-        row: '120 L',
         price: 'Rp180.000',
         specs: [
           ['Kapasitas', '120 L'],
@@ -120,7 +106,6 @@ const products = [
       {
         name: 'O.T. 150',
         item: 'Drum Open Top 150 L',
-        row: '150 L',
         price: 'Rp195.000',
         specs: [
           ['Kapasitas', konfirmasi('120 L')],
@@ -136,7 +121,6 @@ const products = [
       {
         name: 'O.T. 200',
         item: 'Drum Open Top 200 L',
-        row: '200 L',
         price: 'Rp285.000',
         specs: [
           ['Kapasitas', '200 L'],
@@ -157,7 +141,6 @@ const products = [
     alt: 'Dua drum biru 200 L: Singel Ring dan Double Ring',
     description: 'Drum plastik 200 liter dari HDPE, tersedia model Singel Ring dan Double Ring.',
     item: 'Drum 200 Liter',
-    listTitle: 'Drum 200 Liter',
     minOrder: MIN_DRUM,
     /* Harga dari pemilik memakai nama Ring 1 / Ring 2 / Sabuk 2, sedangkan brosur memakai Singel Ring /
        Double Ring. Belum ada konfirmasi bahwa keduanya sama, jadi harga tidak dihubungkan ke pilihan Model. */
@@ -200,14 +183,12 @@ const products = [
     image: 'images/product-4.jpg',
     alt: 'IBC tank 1000 liter dengan rangka besi dan palet, lengkap dengan ukuran',
     description: 'IBC tank 1000 liter dari HDPE dengan rangka besi dan tutup atas yang bisa dibuka.',
-    listTitle: 'IBC Tank',
     minOrder: PENDING,
     variantLabel: 'Tipe',
     variants: [
       {
         name: '1000 L (open lid)',
         item: 'IBC Tank 1000 Liter',
-        row: '1000 L',
         price: 'Rp3.000.000',
         specs: [
           ['Kapasitas', '1000 L'],
@@ -235,11 +216,6 @@ const products = [
 
   const root = document.querySelector('[data-catalog]');
   if (root && products.length) initCatalog(root);
-
-  const priceBox = document.querySelector('[data-pricelist]');
-  if (priceBox) buildPriceList(priceBox);
-  const minimumBox = document.querySelector('[data-minimum]');
-  if (minimumBox) buildMinimums(minimumBox);
 
   /* Pembuat elemen kecil: teks selalu lewat node teks, jadi "&" dan tanda lain aman */
   function h(tag, attrs = {}, ...kids) {
@@ -357,29 +333,6 @@ const products = [
 
     update();
     return panel;
-  }
-
-  /* Daftar Harga: satu kelompok per produk, satu baris per tipe/varian, dari array products.
-     Setiap harga tampil dengan namanya sendiri; tidak ada yang digabung atau disamakan. */
-  function buildPriceList(box) {
-    const amount = (price) => Number(price.replace(/\D/g, '')); // hanya untuk mengurutkan, tidak ditampilkan
-    box.replaceChildren(...products.map((p, i) => {
-      const gid = `harga-grup-${i + 1}`;
-      const rows = [...(p.prices || p.variants)].sort((a, b) => amount(b.price) - amount(a.price));
-      return h('section', { class: 'pricegroup', 'aria-labelledby': gid },
-        h('h3', { id: gid }, p.listTitle),
-        p.priceTitle && h('p', { class: 'pricegroup__note' }, p.priceTitle),
-        h('dl', {}, rows.map((r) => h('div', {}, h('dt', {}, r.row), h('dd', {}, r.price)))));
-    }));
-  }
-
-  /* Pembelian Minimum */
-  function buildMinimums(list) {
-    list.replaceChildren(...minimums.map((m) => h('div', {},
-      h('dt', {}, m.name),
-      typeof m.value === 'string'
-        ? h('dd', {}, m.value)
-        : h('dd', { class: 'is-pending' }, 'Menunggu konfirmasi'))));
   }
 
   /* Katalog: carousel loop (Produk 1 > 2 > 3 > 1). Produk aktif di tengah; sebelum/sesudahnya
