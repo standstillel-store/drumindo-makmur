@@ -13,9 +13,27 @@ const WHATSAPP_NUMBER = '6285801281069'; // 0858-0128-1069
 const PENDING = { status: 'pending' };
 const konfirmasi = (value) => ({ value, status: 'check' });
 
+/* Harga dan minimum pembelian dari pemilik (Bu Marissa), ditulis persis seperti yang diberikan.
+   - price    : tampil apa adanya, tidak dibulatkan dan tidak disingkat ("Rp290.000", bukan "290K")
+   - minOrder : minimum pembelian produk; PENDING = belum ada dari pemilik, tampil "Menunggu konfirmasi" */
+const MIN_DRUM = '100 pcs';
+const MIN_JERIGEN = '300 pcs';
+
+/* Blok "Pembelian Minimum". Nilainya sama dengan minOrder di produk. */
+const minimums = [
+  { name: 'Drum Plastik', value: MIN_DRUM },
+  { name: 'Jerigen', value: MIN_JERIGEN },
+  { name: 'IBC Tank', value: PENDING },
+];
+
 /* Satu produk = satu slide di carousel + satu panel informasi.
    image       : foto produk (rasio 5:4, 800 x 640 px)
-   variants    : pilihan ukuran/tipe; spesifikasinya berganti saat dipilih
+   variants    : pilihan ukuran/tipe; spesifikasi dan harganya berganti saat dipilih
+                 (item = nama lengkap untuk pesan WhatsApp, row = nama pendek di Daftar Harga, price = harga)
+   prices      : dipakai bila satu produk punya beberapa harga yang belum dipetakan ke pilihan di atas;
+                 semua harga tampil bersamaan, masing-masing dengan namanya sendiri (row, price)
+   listTitle   : judul kelompok di Daftar Harga
+   minOrder    : minimum pembelian (MIN_DRUM, MIN_JERIGEN, atau PENDING)
    features    : daftar keunggulan (boleh dihapus)
    specTitle   : judul spesifikasi (boleh dihapus, bawaan "Spesifikasi") */
 const products = [
@@ -24,10 +42,15 @@ const products = [
     image: 'images/product-1.jpg',
     alt: 'Dua jerigen biru: 30 L bertutup hitam dan 35 L bertutup merah',
     description: 'Jerigen plastik biru ukuran 30 liter dan 35 liter.',
+    listTitle: 'Jerigen',
+    minOrder: MIN_JERIGEN,
     variantLabel: 'Ukuran',
     variants: [
       {
         name: '30 L',
+        item: 'Jerigen 30 Liter',
+        row: '30 L',
+        price: 'Rp50.000',
         specs: [
           ['Kapasitas', '30 L'],
           ['Material', 'HDPE'],
@@ -40,6 +63,9 @@ const products = [
       },
       {
         name: '35 L',
+        item: 'Jerigen 35 Liter',
+        row: '35 L',
+        price: 'Rp51.000',
         specs: [
           ['Kapasitas', '35 L'],
           ['Material', 'HDPE'],
@@ -57,10 +83,15 @@ const products = [
     image: 'images/product-2.jpg',
     alt: 'Empat drum open top biru: 60 L, 120 L, 150 L, dan 200 L',
     description: 'Drum plastik open top dari HDPE dalam empat tipe: O.T. 60, O.T. 120, O.T. 150, dan O.T. 200.',
+    listTitle: 'Drum Open Top',
+    minOrder: MIN_DRUM,
     variantLabel: 'Tipe',
     variants: [
       {
         name: 'O.T. 60',
+        item: 'Drum Open Top 60 L',
+        row: '60 L',
+        price: 'Rp110.000',
         specs: [
           ['Kapasitas', '60 L'],
           ['Material', 'HDPE'],
@@ -73,6 +104,9 @@ const products = [
       },
       {
         name: 'O.T. 120',
+        item: 'Drum Open Top 120 L',
+        row: '120 L',
+        price: 'Rp180.000',
         specs: [
           ['Kapasitas', '120 L'],
           ['Material', 'HDPE'],
@@ -85,6 +119,9 @@ const products = [
       },
       {
         name: 'O.T. 150',
+        item: 'Drum Open Top 150 L',
+        row: '150 L',
+        price: 'Rp195.000',
         specs: [
           ['Kapasitas', konfirmasi('120 L')],
           ['Material', 'HDPE'],
@@ -98,6 +135,9 @@ const products = [
       },
       {
         name: 'O.T. 200',
+        item: 'Drum Open Top 200 L',
+        row: '200 L',
+        price: 'Rp285.000',
         specs: [
           ['Kapasitas', '200 L'],
           ['Material', 'HDPE'],
@@ -116,6 +156,16 @@ const products = [
     image: 'images/product-3.jpg',
     alt: 'Dua drum biru 200 L: Singel Ring dan Double Ring',
     description: 'Drum plastik 200 liter dari HDPE, tersedia model Singel Ring dan Double Ring.',
+    item: 'Drum 200 Liter',
+    listTitle: 'Drum 200 Liter',
+    minOrder: MIN_DRUM,
+    /* Harga dari pemilik memakai nama Ring 1 / Ring 2 / Sabuk 2, sedangkan brosur memakai Singel Ring /
+       Double Ring. Belum ada konfirmasi bahwa keduanya sama, jadi harga tidak dihubungkan ke pilihan Model. */
+    priceTitle: 'Harga berdasarkan tipe/varian',
+    prices: [
+      { row: 'Ring 2 / Sabuk 2', price: 'Rp290.000' },
+      { row: 'Ring 1', price: 'Rp270.000' },
+    ],
     variantLabel: 'Model',
     specTitle: 'Spesifikasi Drum 200L Non UN/KW',
     variants: [
@@ -150,10 +200,15 @@ const products = [
     image: 'images/product-4.jpg',
     alt: 'IBC tank 1000 liter dengan rangka besi dan palet, lengkap dengan ukuran',
     description: 'IBC tank 1000 liter dari HDPE dengan rangka besi dan tutup atas yang bisa dibuka.',
+    listTitle: 'IBC Tank',
+    minOrder: PENDING,
     variantLabel: 'Tipe',
     variants: [
       {
         name: '1000 L (open lid)',
+        item: 'IBC Tank 1000 Liter',
+        row: '1000 L',
+        price: 'Rp3.000.000',
         specs: [
           ['Kapasitas', '1000 L'],
           ['Material', 'HDPE'],
@@ -180,6 +235,11 @@ const products = [
 
   const root = document.querySelector('[data-catalog]');
   if (root && products.length) initCatalog(root);
+
+  const priceBox = document.querySelector('[data-pricelist]');
+  if (priceBox) buildPriceList(priceBox);
+  const minimumBox = document.querySelector('[data-minimum]');
+  if (minimumBox) buildMinimums(minimumBox);
 
   /* Pembuat elemen kecil: teks selalu lewat node teks, jadi "&" dan tanda lain aman */
   function h(tag, attrs = {}, ...kids) {
@@ -226,20 +286,30 @@ const products = [
     return h('div', {}, h('dt', {}, label), dd);
   }
 
-  /* Panel informasi: nama, deskripsi, pilihan ukuran/tipe, spesifikasi, tombol Order now.
-     Nama varian baru masuk ke pesan WhatsApp setelah pengunjung memilihnya sendiri. */
+  /* Panel informasi: nama, deskripsi, pilihan ukuran/tipe, kelompok harga + minimum + Order now, spesifikasi.
+     Harga yang tampil selalu milik tipe yang sedang dipilih, dan pesan WhatsApp menyebut tipe yang sama.
+     Produk dengan beberapa harga tanpa pilihan tipe (p.prices) menampilkan semua harganya; nama Model
+     baru masuk ke pesan setelah pengunjung memilihnya sendiri. */
   function buildPanel(p, i, announce) {
     const id = `produk-${i + 1}`;
     const state = { variant: 0, picked: false };
+    const hasPrices = Boolean(p.prices);
 
     const chips = p.variants.map((v, vi) =>
       h('button', { class: 'variant', type: 'button', 'aria-pressed': String(vi === 0) }, v.name));
     const specs = h('dl', { class: 'spec' });
     const note = h('p', { class: 'detail__note' });
-    const cta = h('a', { class: 'btn', target: '_blank', rel: 'noopener' },
-      icon('i-wa'),
-      'Order now',
-      h('span', { class: 'sr-only' }, `: ${p.name} lewat WhatsApp`));
+
+    const priceLabel = h('p', { class: 'buy__label' }, hasPrices ? p.priceTitle : '');
+    const priceValue = hasPrices
+      ? h('dl', { class: 'buy__prices' },
+        p.prices.map((e) => h('div', {}, h('dt', {}, e.row), h('dd', {}, e.price))))
+      : h('p', { class: 'buy__price' });
+    const minValue = typeof p.minOrder === 'string'
+      ? h('strong', {}, p.minOrder)
+      : h('span', { class: 'is-pending' }, 'Menunggu konfirmasi');
+    const ctaName = h('span', { class: 'sr-only' });
+    const cta = h('a', { class: 'btn', target: '_blank', rel: 'noopener' }, icon('i-wa'), 'Order now', ctaName);
 
     const panel = h('article', { class: 'detail__item', id, 'aria-labelledby': `${id}-nama` },
       h('h3', { class: 'detail__name', id: `${id}-nama` }, p.name),
@@ -247,13 +317,18 @@ const products = [
       p.variants.length > 1 && h('div', { class: 'variants', role: 'group', 'aria-labelledby': `${id}-varian` },
         h('p', { class: 'variants__label', id: `${id}-varian` }, p.variantLabel),
         h('div', { class: 'variants__list' }, chips)),
+      h('div', { class: 'buy', role: 'group', 'aria-label': 'Harga dan pemesanan' },
+        priceLabel,
+        priceValue,
+        h('span', { class: 'buy__rule', 'aria-hidden': 'true' }),
+        h('p', { class: 'buy__min' }, h('span', {}, 'Minimal pembelian'), minValue),
+        cta),
       h('h4', { class: 'spec__title' }, p.specTitle || 'Spesifikasi'),
       specs,
       note,
       p.features && h('div', { class: 'features' },
         h('h4', { class: 'features__title' }, 'Keunggulan'),
-        h('ul', {}, p.features.map((f) => h('li', {}, f)))),
-      cta);
+        h('ul', {}, p.features.map((f) => h('li', {}, f)))));
 
     function update() {
       const v = p.variants[state.variant];
@@ -261,7 +336,13 @@ const products = [
       specs.replaceChildren(...v.specs.map(([label, val]) => specRow(label, val)));
       note.textContent = v.note || '';
       note.hidden = !v.note;
-      cta.href = waLink(orderText(state.picked ? `${p.name} (${v.name})` : p.name));
+      if (!hasPrices) {
+        priceLabel.textContent = v.item;
+        priceValue.textContent = v.price;
+      }
+      const target = hasPrices ? (state.picked ? `${p.item} ${v.name}` : p.item) : v.item;
+      cta.href = waLink(orderText(target));
+      ctaName.textContent = `: ${target} lewat WhatsApp`;
     }
 
     chips.forEach((chip, ci) => {
@@ -269,12 +350,36 @@ const products = [
         state.variant = ci;
         state.picked = true;
         update();
-        announce(`${p.name}, ${p.variants[ci].name}`);
+        const v = p.variants[ci];
+        announce(hasPrices ? `${p.name}, ${v.name}` : `${v.item}, ${v.price}`);
       });
     });
 
     update();
     return panel;
+  }
+
+  /* Daftar Harga: satu kelompok per produk, satu baris per tipe/varian, dari array products.
+     Setiap harga tampil dengan namanya sendiri; tidak ada yang digabung atau disamakan. */
+  function buildPriceList(box) {
+    const amount = (price) => Number(price.replace(/\D/g, '')); // hanya untuk mengurutkan, tidak ditampilkan
+    box.replaceChildren(...products.map((p, i) => {
+      const gid = `harga-grup-${i + 1}`;
+      const rows = [...(p.prices || p.variants)].sort((a, b) => amount(b.price) - amount(a.price));
+      return h('section', { class: 'pricegroup', 'aria-labelledby': gid },
+        h('h3', { id: gid }, p.listTitle),
+        p.priceTitle && h('p', { class: 'pricegroup__note' }, p.priceTitle),
+        h('dl', {}, rows.map((r) => h('div', {}, h('dt', {}, r.row), h('dd', {}, r.price)))));
+    }));
+  }
+
+  /* Pembelian Minimum */
+  function buildMinimums(list) {
+    list.replaceChildren(...minimums.map((m) => h('div', {},
+      h('dt', {}, m.name),
+      typeof m.value === 'string'
+        ? h('dd', {}, m.value)
+        : h('dd', { class: 'is-pending' }, 'Menunggu konfirmasi'))));
   }
 
   /* Katalog: carousel loop (Produk 1 > 2 > 3 > 1). Produk aktif di tengah; sebelum/sesudahnya

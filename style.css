@@ -1,6 +1,6 @@
 /* Drumindo Makmur
    Warna dan font ada di :root. Warna diambil dari foto produk dan logo (navy, cobalt, cyan).
-   Amber hanya dipakai untuk tombol Order now. */
+   Amber hanya dipakai untuk tombol Order now dan garis kecil di bawah harga. */
 
 @font-face {
   font-family: "Drum Display";
@@ -33,7 +33,7 @@
   --ink-soft: #44526f;
   --line: #d3dce9;
   --line-strong: #7f92b3;
-  --amber: #f5a524;       /* hanya CTA */
+  --amber: #f5a524;       /* tombol Order now dan garis di bawah harga */
   --amber-hover: #ffb740;
 
   --font-display: "Drum Display", "Arial Narrow", "Liberation Sans Narrow", Arial, sans-serif;
@@ -104,7 +104,7 @@ button { font: inherit; color: inherit; }
   color: var(--navy);
 }
 
-/* Tombol Order now (satu-satunya elemen amber) */
+/* Tombol Order now */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -147,6 +147,16 @@ button { font: inherit; color: inherit; }
 }
 .site-header nav a:hover { border-color: var(--cobalt); }
 
+@media (max-width: 29.99rem) {
+  .site-header nav a[href="#tentang"] { display: none; }
+}
+/* Layar sangat sempit (320 px): logo dan menu dikecilkan sedikit supaya header tidak melebar */
+@media (max-width: 22.5rem) {
+  .brand img { height: 2rem; }
+  .site-header { gap: 0.75rem; }
+  .site-header nav { gap: 0.875rem; }
+  .site-header nav a { font-size: 0.875rem; }
+}
 @media (min-width: 48rem) {
   .brand img { height: 3.25rem; }
   .site-header nav { gap: 2rem; }
@@ -210,14 +220,33 @@ button { font: inherit; color: inherit; }
   line-height: 1.5;
   color: rgb(255 255 255 / 0.92);
 }
-.hero .btn { margin-top: clamp(1.5rem, 3vw, 2rem); }
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 1.75rem;
+  margin-top: clamp(1.5rem, 3vw, 2rem);
+}
+.hero__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: var(--white);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+.hero__link:hover { text-decoration-thickness: 2px; }
 
 /* Produk */
 .products {
   padding-block: var(--section-y);
   background: var(--off-white);
 }
-.products .section-title { margin-bottom: clamp(1.25rem, 3vw, 2.25rem); }
+.products .section-title,
+.prices .section-title,
+.minimum .section-title { margin-bottom: clamp(1.25rem, 3vw, 2.25rem); }
 
 .catalog {
   display: grid;
@@ -227,7 +256,9 @@ button { font: inherit; color: inherit; }
 
 .noscript { color: var(--ink-soft); }
 .noscript a { color: var(--cobalt); font-weight: 600; }
-.no-js .catalog { display: none; }
+.no-js .catalog,
+.no-js .prices,
+.no-js .minimum { display: none; }
 
 /* Carousel: semua slide menumpuk di satu sel grid; posisi, skala, blur, dan bayangan diatur script.js */
 .stage {
@@ -444,7 +475,62 @@ button { font: inherit; color: inherit; }
   background: var(--cobalt);
 }
 
-.detail .btn { margin-top: 1.75rem; }
+/* Harga, minimum pembelian, dan Order now: satu kelompok. Harga berukuran besar dan berwarna navy
+   (amber di atas putih tidak cukup kontras untuk teks); amber hanya garis kecil di bawahnya dan tombol. */
+.buy {
+  max-width: 32rem;
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+.buy__label,
+.buy__prices dt {
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+}
+.buy__price {
+  margin-top: 0.1rem;
+  font: 700 clamp(2.5rem, 4.6vw, 3.25rem) / 1.05 var(--font-display);
+  letter-spacing: 0.01em;
+  color: var(--navy);
+}
+.buy__prices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+  gap: 0.9rem 1.5rem;
+  margin-top: 0.6rem;
+}
+.buy__prices dd {
+  margin-top: 0.05rem;
+  font: 700 clamp(1.875rem, 3vw, 2.375rem) / 1.05 var(--font-display);
+  letter-spacing: 0.01em;
+  color: var(--navy);
+}
+.buy__rule {
+  display: block;
+  width: 3rem;
+  height: 3px;
+  margin-top: 0.9rem;
+  background: var(--amber);
+}
+.buy__min {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.1rem 0.75rem;
+  margin-top: 1rem;
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+}
+.buy__min strong {
+  font: 600 1.25rem / 1.3 var(--font-text);
+  color: var(--navy);
+}
+.buy__min .is-pending {
+  font-style: italic;
+  font-size: 1rem;
+}
+.buy .btn { margin-top: 1.25rem; }
 
 @media (max-width: 59.99rem) {
   /* Di layar sempit hanya panel aktif yang ada, jadi tinggi halaman mengikuti produk */
@@ -452,7 +538,8 @@ button { font: inherit; color: inherit; }
   .catalog__media { margin-inline: calc(-1 * var(--gutter)); }
 }
 @media (max-width: 39.99rem) {
-  .detail .btn { width: 100%; }
+  .buy .btn,
+  .minimum .btn { width: 100%; }
 }
 @media (min-width: 40rem) {
   .slide { width: min(66%, 30rem); }
@@ -468,6 +555,110 @@ button { font: inherit; color: inherit; }
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
     mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
   }
+}
+
+/* Daftar Harga: kelompok per produk, baris dengan garis tipis. Tanpa kartu, tanpa bayangan. */
+.prices {
+  padding-block: var(--section-y);
+  background: var(--white);
+}
+.pricelist {
+  display: grid;
+  gap: 2.25rem;
+}
+.pricegroup { break-inside: avoid; }
+.pricegroup h3 {
+  font: 700 1.5rem / 1.15 var(--font-display);
+  letter-spacing: 0.005em;
+  color: var(--navy);
+}
+.pricegroup__note {
+  margin-top: 0.2rem;
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+}
+.pricegroup dl {
+  margin-top: 0.6rem;
+  border-bottom: 1px solid var(--line);
+}
+.pricegroup dl > div {
+  display: grid;
+  gap: 0.1rem;
+  padding: 0.9rem 0;
+  border-top: 1px solid var(--line);
+}
+.pricegroup dt {
+  font-weight: 600;
+  color: var(--navy);
+}
+.pricegroup dd {
+  font: 700 1.75rem / 1.1 var(--font-display);
+  letter-spacing: 0.01em;
+  color: var(--navy);
+}
+
+@media (min-width: 30rem) {
+  .pricegroup dl > div {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 1rem;
+  }
+  .pricegroup dd { text-align: right; }
+}
+@media (min-width: 48rem) {
+  /* Dua kolom yang mengalir dari atas ke bawah, supaya tidak ada celah kosong di antara kelompok */
+  .pricelist {
+    display: block;
+    column-count: 2;
+    column-gap: clamp(2.5rem, 6vw, 5rem);
+  }
+  .pricegroup { margin-bottom: 2.75rem; }
+}
+
+/* Pembelian Minimum: informasi pembelian, bukan peringatan, jadi tanpa warna merah */
+.minimum {
+  padding-block: var(--section-y);
+  background: var(--off-white);
+}
+.minimum__list { display: grid; }
+.minimum__list > div {
+  display: grid;
+  gap: 0.1rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--line-strong);
+}
+.minimum__list dt { color: var(--ink-soft); }
+.minimum__list dd {
+  font: 700 2rem / 1.1 var(--font-display);
+  letter-spacing: 0.01em;
+  color: var(--navy);
+}
+.minimum__list dd.is-pending {
+  font: 400 1rem / 1.5 var(--font-text);
+  font-style: italic;
+  color: var(--ink-soft);
+}
+.minimum .btn { margin-top: 1.5rem; }
+
+@media (min-width: 30rem) {
+  .minimum__list > div {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 1rem;
+  }
+}
+@media (min-width: 48rem) {
+  .minimum__list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+  }
+  .minimum__list > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.25rem;
+    padding-top: 1.1rem;
+  }
+  .minimum__list dd { font-size: 2.5rem; }
+  .minimum__list dd.is-pending { font-size: 1rem; }
 }
 
 /* Tentang */
